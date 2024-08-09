@@ -1,0 +1,51 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+env/
+venv/
+ENV/
+ENV.bak/
+*.egg-info/
+*.egg
+*.venv
+*.virtualenv
+
+# Django
+*.log
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+static/
+*.pot
+*.po
+
+# Environment Variables
+.env
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+MANIFEST
+
+# Miscellaneous
+*.bak
+*.tmp
+*.tmp.*
+
+# macOS Finder files
+*.DS_Store
