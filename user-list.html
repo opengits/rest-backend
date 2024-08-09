@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <div id="error" class="error"></div>
+    <ul id="userList"></ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const apiUrl = 'http://localhost:8000/api/users/'; // Your API endpoint
+
+            function fetchUsers() {
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const userList = document.getElementById('userList');
+                        const errorDiv = document.getElementById('error');
+                        userList.innerHTML = ''; // Clear any existing content
+                        errorDiv.textContent = ''; // Clear any existing error message
+
+                        if (data.length === 0) {
+                            userList.innerHTML = '<li>No users found</li>';
+                            return;
+                        }
+
+                        data.forEach(user => {
+                            const li = document.createElement('li');
+                            li.textContent = `${user.first_name} ${user.last_name} - ${user.email}`;
+                            userList.appendChild(li);
+                        });
+                    })
+                    .catch(error => {
+                        const errorDiv = document.getElementById('error');
+                        errorDiv.textContent = `Error fetching users: ${error.message}`;
+                    });
+            }
+
+            fetchUsers();
+        });
+    </script>
+</body>
+</html>
